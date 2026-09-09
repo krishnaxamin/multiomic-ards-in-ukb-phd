@@ -1,0 +1,1 @@
+Before time series were created, diseases were filtered to be common and unisex, such that only common-unisex diseases had their time series created. The list of common-unisex diseases determined for each cohort can be found in `~/data/internal/<omic>/<omic>_pan_ukbb_eur_common_unisex_disease_date_fields.csv`.

@@ -1,0 +1,1 @@
+SSA smoothing was conducted with time series from every cohort by switching out the `time_series_file_names`.

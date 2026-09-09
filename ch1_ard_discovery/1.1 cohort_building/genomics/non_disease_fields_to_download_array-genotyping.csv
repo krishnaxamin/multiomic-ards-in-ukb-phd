@@ -1,0 +1,41 @@
+﻿field,description
+p21003_i0,Age at assessment
+p31,Sex
+p52,Month of brith
+p34,Year of birth
+p53_i0,Date of attending assessment centre
+p54_i0,UK Biobank assessment centre
+p22000,Genotype measurement batch
+p22007,Genotype measurement plate
+p22008,Genotype measurement well
+p22006,Genetic ethnicity
+p21000_i0,Self-reported ethnicity
+p21001_i0,BMI (measurements)
+p23104_i0,BMI (impedance)
+p23099_i0,Body fat % (impedance)
+p48_i0,Waist circumference
+p49_i0,Hip circumference
+p44_i0,Tape measure device ID (measurements)
+p39_i0,Height measure device ID (measurements)
+p21_i0,Weight method (measurements)
+p43_i0,Impedance device ID (impedance)
+p22009_a1,PC1
+p22009_a2,PC2
+p22009_a3,PC3
+p22009_a4,PC4
+p22009_a5,PC5
+p22009_a6,PC6
+p22009_a7,PC7
+p22009_a8,PC8
+p22009_a9,PC9
+p22009_a10,PC10
+p22009_a11,PC11
+p22009_a12,PC12
+p22009_a13,PC13
+p22009_a14,PC14
+p22009_a15,PC15
+p22009_a16,PC16
+p22009_a17,PC17
+p22009_a18,PC18
+p22009_a19,PC19
+p22009_a20,PC20

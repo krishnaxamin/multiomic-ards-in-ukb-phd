@@ -1,0 +1,1 @@
+Technical covariates were downloaded along with biological data, in `~/ch1_ard_discovery/1.1 cohort_building`

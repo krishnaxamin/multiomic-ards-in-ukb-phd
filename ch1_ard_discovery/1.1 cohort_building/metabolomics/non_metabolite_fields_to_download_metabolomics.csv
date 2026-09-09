@@ -1,0 +1,21 @@
+﻿field,description
+p21003_i0,Age at assessment
+p31,Sex
+p52,Month of brith
+p34,Year of birth
+p53_i0,Date of attending assessment centre
+p54_i0,UK Biobank assessment centre
+p23658_i0,Sample Measured Date and Time
+p23659_i0,Sample Prepared Date and Time
+p23649_i0,Shipment Plate
+p23650_i0,Spectrometer
+p23660_i0,Well position within plate
+p21001_i0,BMI (measurements)
+p23104_i0,BMI (impedance)
+p23099_i0,Body fat % (impedance)
+p48_i0,Waist circumference
+p49_i0,Hip circumference
+p44_i0,Tape measure device ID (measurements)
+p39_i0,Height measure device ID (measurements)
+p21_i0,Weight method (measurements)
+p43_i0,Impedance device ID (impedance)
