@@ -1,0 +1,5 @@
+# Code
+- `abf_susie_fine_mapping.R`: Perform fine mapping for a given disease and LD-independent block. ABF is performed first, then SuSiE is performed if it can execute successfully (see **Results R2.3.2.3**).
+- `abf_susie_fine_mapping_minimal.sh` & `abf_susie_fine_mapping_lifestyles.sh`: Shell script to execute fine mapping using minimally adjusted and lifestyle-adjusted GWAS results.
+- `fine_mapping_analysis.R`: Collates results from Robjs resulting from `abf_susie_fine_mapping.R`, identifying variants with highest PIP in a region and variants with high-confidence (PIP > 0.9) and low-confidence (0.9 > PIP > 0.5) PIP.
+- `fine_mapping_analysis.py`: Map fine mapped variants to genes and merge results from overlapping blocks, given the blocks are from the same set of GWAS results (same disease, same adjustment). Conduct high-level statistics.

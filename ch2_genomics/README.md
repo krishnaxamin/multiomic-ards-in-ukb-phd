@@ -1,0 +1,1 @@
+Directories correspond to code used for each of the sections in **Methods M2**. Final results are generally contained in `~/data/internal/genomics/`, while data produced as part of the workflow that are not final results are stored within each section's directory.

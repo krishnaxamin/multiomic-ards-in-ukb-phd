@@ -1,0 +1,1 @@
+Subdirectories would contain output from the shell scripts, but they are empty here, retained for directory structure and reproducibility.
