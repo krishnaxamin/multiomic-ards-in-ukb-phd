@@ -26,7 +26,7 @@ def common_unisex_disease_check(input_df, sex_df, cohort_num_ppl=1000, case_cont
 
     disease_sex_counter = Counter(input_df_with_sex['sex'].tolist())
     if unisex_check:
-        if disease_sex_counter['Male'] > cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] > cohort_num_females * unisex_max_rate:
+        if disease_sex_counter['Male'] >= cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] >= cohort_num_females * unisex_max_rate:
             disease_is_unisex = True
         else:
             disease_is_unisex = False
@@ -154,12 +154,7 @@ def get_age_of_onset_info_for_common_unisex_diseases(subset_phenotypes, subset_e
                 age_of_onset_list.append(0.0)
                 age_of_onset_rounded_list.append(0.0)
                 onset_relative_to_assessment_list.append('before')
-            # elif disease_df[disease_code_date_field][i] in ['1902-02-02', '1903-03-03',
-            # 'Code has event date matching participant\'s date of birth',
-            # 'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']:
-            #     age_of_onset_list.append(0.0)
-            #     age_of_onset_rounded_list.append(0.0)
-            #     onset_relative_to_assessment_list.append('before')
+
             else:
                 dob = datetime.strptime('1 ' + disease_df['p52'][i] + ' ' + str(disease_df['p34'][i]), '%d %B %Y')
                 date_of_assessment = datetime.strptime(disease_df['p53_i0'][i], '%Y-%m-%d')
@@ -215,10 +210,6 @@ high_missingness_eids = list(read_csv('~/ch1_ard_discovery/1.2 cohort_data/1.2.1
 
 filtered_phenotypes = phenotypes[(phenotypes['eid'].isin(pan_ukbb_eur_eids)) & (~phenotypes['eid'].isin(high_missingness_eids))]
 filtered_covariates = covariates[(covariates['eid'].isin(pan_ukbb_eur_eids)) & (~covariates['eid'].isin(high_missingness_eids))]
-# sex_panukbb = read_csv('sex-ancestry-group_per_metabolome_person.csv')
-
-# eid_sex = sex_panukbb[['eid', 'sex']]
-# eid_panukbb = sex_panukbb[['eid', 'pan_ukbb_ancestry_group']]
 
 eid_sex = filtered_covariates[['eid', 'p31']]
 eid_sex.columns = ['eid', 'sex']

@@ -14,7 +14,7 @@ from math import ceil
 def common_unisex_disease_check(input_df, cohort_num_ppl=1000, case_control_max=199,
                                 cohort_num_males=10, cohort_num_females=10, unisex_max_rate=0.001):
     disease_sex_counter = Counter(input_df['p31'].tolist())
-    if disease_sex_counter['Male'] > cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] > cohort_num_females * unisex_max_rate:
+    if disease_sex_counter['Male'] >= cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] >= cohort_num_females * unisex_max_rate:
         disease_is_unisex = True
     else:
         disease_is_unisex = False
@@ -110,22 +110,11 @@ for disease_code_date_field in disease_codes_date_fields_list:
                                                                      'Code has event date in the future and is presumed to be a place-holder or other system default']):
             disease_df = disease_df.drop(i)
             continue
-        # if disease_df[disease_code_date_field][i] in ['1900-01-01', '1901-01-01', '2037-07-07',
-        # 'Code has no event date', 'Code has event date before participant\'s date of birth',
-        # 'Code has event date in the future and is presumed to be a place-holder or other system default']:
-        #     disease_df = disease_df.drop(i)
-        #     continue
         elif any(x in disease_df[disease_code_date_field][i] for x in ['1902-02-02', '1903-03-03',
                                                                        'Code has event date matching participant\'s date of birth',
                                                                        'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']):
             age_of_onset_list.append(0.0)
             age_of_onset_rounded_list.append(0.0)
-        # elif disease_df[disease_code_date_field][i] in ['1902-02-02', '1903-03-03',
-        # 'Code has event date matching participant\'s date of birth',
-        # 'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']:
-        #     age_of_onset_list.append(0.0)
-        #     age_of_onset_rounded_list.append(0.0)
-        #     onset_relative_to_assessment_list.append('before')
         else:
             dob = datetime.strptime('1 ' + disease_df['p52'][i] + ' ' + str(disease_df['p34'][i]), '%d %B %Y')
             date_of_assessment = datetime.strptime(disease_df['p53_i0'][i], '%Y-%m-%d')

@@ -26,7 +26,7 @@ def common_unisex_disease_check(input_df, sex_df, cohort_num_ppl=1000, case_cont
 
     disease_sex_counter = Counter(input_df_with_sex['sex'].tolist())
     if unisex_check:
-        if disease_sex_counter['Male'] > cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] > cohort_num_females * unisex_max_rate:
+        if disease_sex_counter['Male'] >= cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] >= cohort_num_females * unisex_max_rate:
             disease_is_unisex = True
         else:
             disease_is_unisex = False
@@ -183,23 +183,12 @@ def get_age_of_onset_info_for_common_unisex_diseases(subset_phenotypes, subset_e
                                                                          'Code has event date in the future and is presumed to be a place-holder or other system default']):
                 disease_df = disease_df.drop(i)
                 continue
-            # if disease_df[disease_code_date_field][i] in ['1900-01-01', '1901-01-01', '2037-07-07',
-            # 'Code has no event date', 'Code has event date before participant\'s date of birth',
-            # 'Code has event date in the future and is presumed to be a place-holder or other system default']:
-            #     disease_df = disease_df.drop(i)
-            #     continue
             elif any(x in disease_df[disease_code_date_field][i] for x in ['1902-02-02', '1903-03-03',
                                                                            'Code has event date matching participant\'s date of birth',
                                                                            'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']):
                 age_of_onset_list.append(0.0)
                 age_of_onset_rounded_list.append(0.0)
                 onset_relative_to_assessment_list.append('before')
-            # elif disease_df[disease_code_date_field][i] in ['1902-02-02', '1903-03-03',
-            # 'Code has event date matching participant\'s date of birth',
-            # 'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']:
-            #     age_of_onset_list.append(0.0)
-            #     age_of_onset_rounded_list.append(0.0)
-            #     onset_relative_to_assessment_list.append('before')
             else:
                 dob = datetime.strptime('1 ' + disease_df['p52'][i] + ' ' + str(disease_df['p34'][i]), '%d %B %Y')
                 date_of_assessment = datetime.strptime(disease_df['p53_i0'][i], '%Y-%m-%d')
@@ -249,10 +238,6 @@ def get_age_of_onset_info_for_common_unisex_diseases(subset_phenotypes, subset_e
 """ Load data """
 phenotypes = read_csv('~/data/internal/proteomics/proteomics_pan_ukbb_eur_phenotypes.csv')
 covariates = read_csv('~/data/internal/proteomics/proteomics_pan_ukbb_eur_participant_covars.csv')
-# sex_panukbb = read_csv('sex-ancestry-group_per_metabolome_person.csv')
-
-# eid_sex = sex_panukbb[['eid', 'sex']]
-# eid_panukbb = sex_panukbb[['eid', 'pan_ukbb_ancestry_group']]
 
 eid_sex = covariates[['eid', 'p31']]
 eid_sex.columns = ['eid', 'sex']

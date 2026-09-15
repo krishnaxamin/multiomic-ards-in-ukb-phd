@@ -26,7 +26,7 @@ def common_unisex_disease_check(input_df, sex_df, cohort_num_ppl=1000, case_cont
 
     disease_sex_counter = Counter(input_df_with_sex['sex'].tolist())
     if unisex_check:
-        if disease_sex_counter['Male'] > cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] > cohort_num_females * unisex_max_rate:
+        if disease_sex_counter['Male'] >= cohort_num_males * unisex_max_rate and disease_sex_counter['Female'] >= cohort_num_females * unisex_max_rate:
             disease_is_unisex = True
         else:
             disease_is_unisex = False
@@ -183,23 +183,12 @@ def get_age_of_onset_info_for_common_unisex_diseases(subset_phenotypes, subset_e
                                                                          'Code has event date in the future and is presumed to be a place-holder or other system default']):
                 disease_df = disease_df.drop(i)
                 continue
-            # if disease_df[disease_code_date_field][i] in ['1900-01-01', '1901-01-01', '2037-07-07',
-            # 'Code has no event date', 'Code has event date before participant\'s date of birth',
-            # 'Code has event date in the future and is presumed to be a place-holder or other system default']:
-            #     disease_df = disease_df.drop(i)
-            #     continue
             elif any(x in disease_df[disease_code_date_field][i] for x in ['1902-02-02', '1903-03-03',
                                                                            'Code has event date matching participant\'s date of birth',
                                                                            'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']):
                 age_of_onset_list.append(0.0)
                 age_of_onset_rounded_list.append(0.0)
                 onset_relative_to_assessment_list.append('before')
-            # elif disease_df[disease_code_date_field][i] in ['1902-02-02', '1903-03-03',
-            # 'Code has event date matching participant\'s date of birth',
-            # 'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']:
-            #     age_of_onset_list.append(0.0)
-            #     age_of_onset_rounded_list.append(0.0)
-            #     onset_relative_to_assessment_list.append('before')
             else:
                 dob = datetime.strptime('1 ' + disease_df['p52'][i] + ' ' + str(disease_df['p34'][i]), '%d %B %Y')
                 date_of_assessment = datetime.strptime(disease_df['p53_i0'][i], '%Y-%m-%d')
@@ -249,10 +238,6 @@ def get_age_of_onset_info_for_common_unisex_diseases(subset_phenotypes, subset_e
 """ Load data """
 phenotypes = read_csv('~/data/internal/metabolomics/metabolomics_pan_ukbb_eur_phenotypes.csv')
 covariates = read_csv('~/data/internal/metabolomics/metabolomics_pan_ukbb_eur_covars.csv')
-# sex_panukbb = read_csv('sex-ancestry-group_per_metabolome_person.csv')
-
-# eid_sex = sex_panukbb[['eid', 'sex']]
-# eid_panukbb = sex_panukbb[['eid', 'pan_ukbb_ancestry_group']]
 
 eid_sex = covariates[['eid', 'p31']]
 eid_sex.columns = ['eid', 'sex']
@@ -318,123 +303,3 @@ for key in per_disease_age_of_onset_info.keys():
         if not os.path.exists(export_path_dir):
             os.makedirs(export_path_dir)
         time_series.to_csv(export_path_dir + '/' + disease + '_' + key.lower() + '_time_series.csv', index=False)
-
-
-# disease_df_dict = {}  # dict populated with a df per disease. the df is keyed with the disease field. the df contains age-of-onset for each afflicted.
-# max_age_of_onset_list = []
-# onset_relative_to_assessment_df = DataFrame(columns=['disease_code',
-#                                                      'num_onset_before_assessment',
-#                                                      'num_onset_after_assessment'])
-# for disease_code_date_field in disease_codes_date_fields_list:
-#     print(disease_code_date_field, flush=True)
-#     disease_code_source_field = 'p' + str(int(disease_code_date_field.split('p')[1]) + 1)
-#     disease_df = phenotypes[phenotypes[disease_code_date_field].notnull()][['eid',
-#                                                                             disease_code_date_field,
-#                                                                             disease_code_source_field]].reset_index(drop=True)
-#     # checks if there's anyone with the disease
-#     if disease_df.empty:
-#         continue
-#     else:
-#         # checks if the disease appears with a certain rate in the cohort in both males and females, e.g. >1 in every 1000 males and >1 in every 1000 females
-#         if not common_unisex_disease_check(disease_df, sex_df=eid_sex, cohort_num_ppl=num_ppl, case_control_max=199,
-#                                            cohort_num_males=num_males, cohort_num_females=num_females,
-#                                            unisex_max_rate=0.001):
-#             continue
-#
-#     # add p52, p34, p53_i0 to disease_df
-#     disease_df = merge(disease_df, covariates[['eid', 'p52', 'p34', 'p53_i0']], on='eid')
-#
-#     age_of_onset_list = []
-#     age_of_onset_rounded_list = []
-#     onset_relative_to_assessment_list = []
-#     for i in range(len(disease_df)):
-#
-#         # make D.O.B from p52, p34 - this could be done also on the OG imported df and replace p52 and p34
-#         # accounts for data-coding 819 (dates that have other meanings)
-#         # (see UKB data-coding 819 - these pseudodates represent errors/oddities in the first occurrence dates)
-#         if any(x in disease_df[disease_code_date_field][i] for x in ['1900-01-01', '1901-01-01', '2037-07-07',
-#         'Code has no event date', 'Code has event date before participant\'s date of birth',
-#         'Code has event date in the future and is presumed to be a place-holder or other system default']):
-#             disease_df = disease_df.drop(i)
-#             continue
-#         # if disease_df[disease_code_date_field][i] in ['1900-01-01', '1901-01-01', '2037-07-07',
-#         # 'Code has no event date', 'Code has event date before participant\'s date of birth',
-#         # 'Code has event date in the future and is presumed to be a place-holder or other system default']:
-#         #     disease_df = disease_df.drop(i)
-#         #     continue
-#         elif any(x in disease_df[disease_code_date_field][i] for x in ['1902-02-02', '1903-03-03',
-#         'Code has event date matching participant\'s date of birth',
-#         'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']):
-#             age_of_onset_list.append(0.0)
-#             age_of_onset_rounded_list.append(0.0)
-#             onset_relative_to_assessment_list.append('before')
-#         # elif disease_df[disease_code_date_field][i] in ['1902-02-02', '1903-03-03',
-#         # 'Code has event date matching participant\'s date of birth',
-#         # 'Code has event date after participant\'s date of birth and falls in the same calendar year as date of birth']:
-#         #     age_of_onset_list.append(0.0)
-#         #     age_of_onset_rounded_list.append(0.0)
-#         #     onset_relative_to_assessment_list.append('before')
-#         else:
-#             dob = datetime.strptime('1 ' + disease_df['p52'][i] + ' ' + str(disease_df['p34'][i]), '%d %B %Y')
-#             date_of_assessment = datetime.strptime(disease_df['p53_i0'][i], '%Y-%m-%d')
-#             date_of_onset = datetime.strptime(disease_df[disease_code_date_field][i], '%Y-%m-%d')
-#
-#             # get age-of-onset from D.O.B and date-of-onset
-#             if date_of_onset.month < dob.month:
-#                 age_of_onset = (date_of_onset.year - dob.year - 1) + (12 - (dob.month - date_of_onset.month))/12
-#             else:
-#                 age_of_onset = (date_of_onset.year - dob.year) + (date_of_onset.month - dob.month)/12
-#             age_of_onset_list.append(age_of_onset)
-#
-#             if age_of_onset % 1 == 0.25:
-#                 age_of_onset_rounded = age_of_onset + 0.25
-#             else:
-#                 age_of_onset_rounded = round(age_of_onset * 2)/2
-#             age_of_onset_rounded_list.append(age_of_onset_rounded)
-#
-#             # onset before or after assessment
-#             if date_of_onset > date_of_assessment:
-#                 onset_relative_to_assessment = 'after'
-#             elif date_of_onset == date_of_assessment:
-#                 onset_relative_to_assessment = 'on'
-#             else:
-#                 onset_relative_to_assessment = 'before'
-#             onset_relative_to_assessment_list.append(onset_relative_to_assessment)
-#
-#     disease_df['age_of_onset'] = age_of_onset_list
-#     disease_df['age_of_onset_rounded'] = age_of_onset_rounded_list
-#     onset_relative_to_assessment_counter = Counter(onset_relative_to_assessment_list)
-#     onset_relative_to_assessment_df = concat([onset_relative_to_assessment_df, DataFrame([{'disease_code': disease_code_date_field,
-#                                                                                           'num_onset_before_assessment': onset_relative_to_assessment_counter['before'],
-#                                                                                           'num_onset_after_assessment': onset_relative_to_assessment_counter['after']}])])
-#
-#     disease_df = disease_df[['eid', 'age_of_onset', 'age_of_onset_rounded']]
-#     disease_df_dict[disease_code_date_field] = disease_df
-#     max_age_of_onset_list.append(max(disease_df['age_of_onset_rounded']))
-
-# """ Export the disease fields that are common and unisex in the metabolomics cohort """
-# metabolomics_common_unisex_disease_date_fields = DataFrame({'disease_field': list(disease_df_dict.keys())})
-# metabolomics_common_unisex_disease_date_fields.to_csv('metabolomics_common_unisex_disease_date_fields.csv', index=False)
-#
-# """ Export how many first occurrences were before or after the assessment centre visit for each disease """
-# onset_relative_to_assessment_df.to_csv('metabolomics_onset_relative_to_assessment.csv', index=False)
-#
-# """ Create disease-specific age-of-onset profiles """
-#
-# create age-of-onset profiles
-# for disease_taken_forward in list(disease_df_dict.keys()):
-#     print(disease_taken_forward)
-#     time_series = make_age_of_onset_time_series(disease_df_dict[disease_taken_forward],
-#                                                 max_age=max_age_of_onset)
-#     time_series.to_csv('metabolomics_time_series/common_unisex_raw/' + disease_taken_forward + '_raw_time_series.csv', index=False)
-#
-#     time_series_by_sex = make_age_of_onset_time_series_by_sex(disease_df_dict[disease_taken_forward],
-#                                                               sex_df=eid_sex,
-#                                                               max_age=max_age_of_onset)
-#     time_series_by_sex.to_csv('metabolomics_time_series/common_unisex_by_sex/' + disease_taken_forward + '_by-sex_time_series.csv', index=False)
-#
-#     time_series_by_panukbb_ancestry = make_age_of_onset_time_series_by_panukbb_ancestry(disease_df_dict[disease_taken_forward],
-#                                                                                         ancestry_df=eid_panukbb,
-#                                                                                         max_age=max_age_of_onset)
-#     time_series_by_panukbb_ancestry.to_csv('metabolomics_time_series/common_unisex_by_panukbb_ancestry/' + disease_taken_forward + '_by-panukbb-ancestry_time_series.csv',
-#                                            index=False)
