@@ -1,0 +1,2 @@
+# Code
+- `genetic_protein_pathway_similarities.py`: Pathway-based similarities between GWAS results and proteomics results from either Firth or Cox regressions, using prevalent or incident diagnoses, respectively.
