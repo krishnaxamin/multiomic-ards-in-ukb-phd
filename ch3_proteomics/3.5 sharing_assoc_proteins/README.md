@@ -1,0 +1,2 @@
+# Code
+- `protein_sharing_pipeline.py`: Pipeline script to analyse the sharing of associated proteins between ARDs in results from Firth and Cox regressions separately. Also conducting auxiliary analyses, e.g., whether ARDs in the same ICD-10 chapter are more likely to significantly share associated proteins or not.
