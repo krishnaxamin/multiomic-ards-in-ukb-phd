@@ -75,3 +75,17 @@ _ = reactome_parentage_analysis(annotation_set=results_assoc_labelled[(results_a
 _ = reactome_parentage_analysis(annotation_set=list(results_assoc_labelled[results_assoc_labelled.fdr_sig == 1].VARIABLE.unique()),
                                 plot_path=f"~/ch2_genomics/2.8 gene_set_enrichment/plots/{adjustment}/parentage_analysis_all_sig_terms",
                                 export_plot=True)
+
+""" Power analyses """
+from utils.enrichment_analyses import effect_vs_logp_plot, enrichment_qqplots
+magma_enrichment_results = pd.read_csv(f"~/data/internal/genomics/magma/lifestyles/reactome_enrichment_results_full.csv")
+
+# effect-vs-logp plot
+effect_vs_logp_plot(enrichment_results_df=magma_enrichment_results,
+                    effect_size_col='BETA', pval_col='P',
+                    plot_export_path=f"~/data/internal/genomics/magma/lifestyles/plots/reactome_enrichment_effect_vs_logp_plot")
+
+# QQ plots
+enrichment_qqplots(enrichment_results_df=magma_enrichment_results,
+                   disease_col='disease', disease_col_disease_id_type='disease_field', pval_col='P',
+                   plot_export_path=f"~/data/internal/genomics/magma/lifestyles/plots/reactome_enrichment_qqplots")
