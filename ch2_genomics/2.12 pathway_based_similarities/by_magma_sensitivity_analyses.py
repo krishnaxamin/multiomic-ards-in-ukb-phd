@@ -310,7 +310,7 @@ def count_high_flying_micas(selected_micas_df: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame(high_flying_micas_slim['mica'].value_counts().rename('pair_count')).reset_index())
 
     # get reactome pathway names
-    reactome_pathways = pd.read_csv('graph_construction/database_data_files/reactome/ReactomePathways.txt', sep='\t',
+    reactome_pathways = pd.read_csv('~/data/external/reactome/ReactomePathways.txt', sep='\t',
                                     header=None, names=['id', 'name', 'species'])
     reactome_pathways = reactome_pathways[reactome_pathways['species'] == 'Homo sapiens'].drop(columns='species')
     high_flying_micas_diseases_df = high_flying_micas_diseases_df.merge(
