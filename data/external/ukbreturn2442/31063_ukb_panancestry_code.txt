@@ -1,0 +1,4 @@
+https://github.com/atgu/ukbb_pan_ancestry/blob/master/pre_process_saige_data.py
+https://github.com/atgu/ukbb_pan_ancestry/blob/master/super_pop_pca.py
+https://github.com/atgu/ukbb_pan_ancestry/blob/master/plot_ukbb_pca.R
+https://github.com/atgu/ukbb_pan_ancestry/blob/master/plot_ukbb_continental_pca.R

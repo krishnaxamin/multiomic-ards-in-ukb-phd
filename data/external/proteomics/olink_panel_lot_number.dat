@@ -1,0 +1,61 @@
+Batch	Panel	Panel_Lot_Nr
+0	Cardiometabolic	B04413
+0	Inflammation	B04411
+0	Neurology	B04414
+0	Oncology	B04412
+1	Cardiometabolic	B04413
+1	Inflammation	B04411
+1	Neurology	B04414
+1	Oncology	B04412
+2	Cardiometabolic	B04413
+2	Inflammation	B04411
+2	Neurology	B04414
+2	Oncology	B04412
+3	Cardiometabolic	B04413
+3	Inflammation	B04411
+3	Neurology	B04414
+3	Oncology	B04412
+4	Cardiometabolic	B04413
+4	Inflammation	B04411
+4	Neurology	B04414
+4	Oncology	B04412
+5	Cardiometabolic	B04413
+5	Inflammation	B04411
+5	Neurology	B04414
+5	Oncology	B04412
+6	Cardiometabolic	B04413
+6	Inflammation	B04411
+6	Neurology	B04414
+6	Oncology	B04412
+7	Cardiometabolic	B04413
+7	Inflammation	B04411
+7	Neurology	B04414
+7	Oncology	B04412
+1	Cardiometabolic II	B20706
+1	Inflammation II	B20704
+1	Neurology II	B20707
+1	Oncology II	B20705
+2	Cardiometabolic II	B20706
+2	Inflammation II	B20704
+2	Neurology II	B20707
+2	Oncology II	B20705
+3	Cardiometabolic II	B20706
+3	Inflammation II	B20704
+3	Neurology II	B20707
+3	Oncology II	B20705
+4	Cardiometabolic II	B20706
+4	Inflammation II	B20704
+4	Neurology II	B20707
+4	Oncology II	B20705
+5	Cardiometabolic II	B20706
+5	Inflammation II	B20704
+5	Neurology II	B20707
+5	Oncology II	B20705
+6	Cardiometabolic II	B20706
+6	Inflammation II	B20704
+6	Neurology II	B20707
+6	Oncology II	B20705
+0	Cardiometabolic II	B20706
+0	Inflammation II	B20704
+0	Neurology II	B20707
+0	Oncology II	B20705

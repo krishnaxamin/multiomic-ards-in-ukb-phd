@@ -1,0 +1,12 @@
+- `ensembl`: Data from Ensembl.
+- `gene_ontology`: Data from the Gene Ontology.
+- `genomics`: External data relevant for genomics analyses, e.g., chromosome coordinates, LD reference files, data describing genotyped and imputed genomic data.
+- `hagr`: Data from the Human Ageing Genomics Resource.
+- `human_protein_atlas`: Data from the Human Protein Atlas.
+- `metabolomics`: Data from the UKB relevant for the metabolomics analyses.
+- `phenotype_coding`: Different phenotype codings and mappings between codings.
+- `proteomics`: Data from the UKB relevant for the proteomics analyses.
+- `qtls`: QTLs from GTEx (eQTLs) and the UKB-PPP (QTLs).
+- `reactome`: Data from Reactome.
+- `stringdb`: Data from STRINGdb.
+- `ukbreturn2442`: Pan-UKB ethnicity assignments

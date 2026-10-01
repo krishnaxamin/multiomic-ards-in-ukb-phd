@@ -1,0 +1,2 @@
+# Data absent
+- `UKB_imputed_SVD_eigen99_extraction/`: HDL reference panel, downloaded using `~/ch2_genomics/2.10 whole_genome_genetic_correlations/hdl/download_hdl_ref.sh`. Used in `ch2_genomics/2.10 whole_genome_genetic_correlations/hdl/hdl.R`.

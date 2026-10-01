@@ -1,0 +1,9 @@
+This file contains covariates and ancestry assignments used in the Pan-UK Biobank Project. The covariates used in all SAIGE regression models for GWAS were:
+Principal components (PCs) 1-10
+age
+sex
+age * sex
+age2
+age2 * sex
+
+This file includes additional PCs, population labels, and relatedness information, as determined by PC-Relate. More detailed information about the iterative ancestry assignment process can be found here: https://pan.ukbb.broadinstitute.org/docs/qc#sample-qc.

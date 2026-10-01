@@ -1,0 +1,3 @@
+# Data absent
+- `w_hm3.snplist/`: Alleles file for use in munging data to LDSC format. Downloaded from https://zenodo.org/records/7773502. Used in `~/ch2_genomics/2.10 whole_genome_genetic_correlations/ldsc/ldsc_prep_sumstats.sh`.
+- `eur_w_ld_chr.tar/`: LD panel from 1KGP EUR, downloaded from https://zenodo.org/records/8182036, used in `~/ch2_genomics/2.10 whole_genome_genetic_correlations/ldsc/ldsc.sh`.

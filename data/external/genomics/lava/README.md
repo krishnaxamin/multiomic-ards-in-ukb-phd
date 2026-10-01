@@ -1,0 +1,2 @@
+# Data absent
+- `ld_ref/lava-ukb-v1.1`: LD reference data for LAVA execution, see `~/ch2_genomics/2.11 local_genetic_correlations/step5a_preload_lava_input.R`. Downloaded from https://github.com/josefin-werme/LAVA/blob/main/REFERENCE.md
